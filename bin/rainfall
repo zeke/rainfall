@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require "io/console"
 %w(date uri rubygems cloudapp_api httparty stamp).each {|lib| require lib }
 
 if ARGV.empty?
@@ -10,9 +11,9 @@ else
 end
 
 puts "What's your cloudapp email address?"
-email = $stdin.gets.chomp
+email = STDIN.gets.chomp
 puts "What's your cloudapp password?"
-password = $stdin.gets.chomp
+password = STDIN.noecho(&:gets).chomp
 
 CloudApp.authenticate email, password
 
