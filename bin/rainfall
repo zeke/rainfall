@@ -36,7 +36,7 @@ Dir.mkdir(dir) unless File.exists?(dir)
     puts url
     puts
 
-    next if filename.include? "http://"
+    next if filename.include? "/"
     next unless url =~ URI::regexp
 
     unless File.exists? filename

@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/zeke/rainfall"
   gem.files         = `git ls-files`.split($\)
   gem.executables   = ["rainfall"]
-  gem.version       = "0.1.1"
+  gem.version       = "0.1.2"
   gem.add_development_dependency 'rake'
   gem.add_dependency 'cloudapp_api', '~> 0.4.0'
   gem.add_dependency 'httparty', '~> 0.12.0'
