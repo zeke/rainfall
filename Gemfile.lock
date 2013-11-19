@@ -1,0 +1,30 @@
+PATH
+  remote: .
+  specs:
+    rainfall (0.1.0)
+      cloudapp_api (~> 0.4.0)
+      httparty (~> 0.12.0)
+      stamp
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    cloudapp_api (0.4.0)
+      httparty
+      httparty
+      mime-types
+    httparty (0.12.0)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    json (1.8.1)
+    mime-types (2.0)
+    multi_xml (0.5.5)
+    rake (10.1.0)
+    stamp (0.5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rainfall!
+  rake

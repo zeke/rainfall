@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+
+%w(date uri rubygems cloudapp_api httparty stamp).each {|lib| require lib }
+
+if ARGV.empty?
+  puts "\nUsage: rainfall ./path/to/download/dir\n"
+  exit(1)
+else
+  dir = ARGV.last
+end
+
+puts "What's your cloudapp email address?"
+email = $stdin.gets.chomp
+puts "What's your cloudapp password?"
+password = $stdin.gets.chomp
+
+CloudApp.authenticate email, password
+
+# Create the downloads directory if it doesn't already exist.
+Dir.mkdir(dir) unless File.exists?(dir)
+
+1.upto(100) do |page|
+
+  drops = CloudApp::Drop.all({
+    :per_page => 100,
+    :page => page
+  })
+
+  for drop in drops
+    date_prefix = Date.parse(drop.data["created_at"]).stamp("2012-12-31")
+    name = drop.data["name"]
+    url = drop.data["remote_url"]
+    filename = File.join(dir, "/#{date_prefix} #{name}")
+    puts filename
+    puts url
+    puts
+
+    next if filename.include? "http://"
+    next unless url =~ URI::regexp
+
+    unless File.exists? filename
+      File.open(filename, "w+") do |f|
+        f.write HTTParty.get(url).parsed_response
+      end
+    end
+  end
+
+end
