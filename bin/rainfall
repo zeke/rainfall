@@ -20,7 +20,7 @@ CloudApp.authenticate email, password
 # Create the downloads directory if it doesn't already exist.
 Dir.mkdir(dir) unless File.exists?(dir)
 
-1.upto(100) do |page|
+1.upto(1000) do |page|
 
   drops = CloudApp::Drop.all({
     :per_page => 100,
