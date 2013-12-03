@@ -29,14 +29,13 @@ Dir.mkdir(dir) unless File.exists?(dir)
 
   for drop in drops
     date_prefix = Date.parse(drop.data["created_at"]).stamp("2012-12-31")
-    name = drop.data["name"]
+    name = drop.data["name"].gsub(/\//, '-')
     url = drop.data["remote_url"]
     filename = File.join(dir, "/#{date_prefix} #{name}")
     puts filename
     puts url
     puts
 
-    next if filename.include? "/"
     next unless url =~ URI::regexp
 
     unless File.exists? filename
